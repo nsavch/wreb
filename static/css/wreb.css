@@ -1,0 +1,66 @@
+.unmatched {
+}
+
+.nomatch {
+    color: red;
+    font-size: 125%;
+}
+
+.match {
+    color: black;
+    background-color: #FFC0CB;
+}
+
+.groupmatch {
+    color: blue;
+    background-color: #FFC0CB;
+}
+
+.whitespace {
+    color: green;
+}
+
+.lineend {
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.tab {
+    color: red;
+}
+
+
+.groups {
+    font-size: 125%;
+    padding: 5px;
+    border: 1px solid black;
+    letter-spacing: 0.1em;
+}
+
+.flags {
+    list-style-type: none;
+}
+
+.errorlist {
+    color: red;
+}
+
+textarea {
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+input[type=checkbox] {
+    margin-right: 5px;
+}
+
+.footer {
+    border-top: 1px solid #E5E5E5;
+    margin-top: 45px;
+    padding: 35px 0 36px;
+}
+
+h1 {
+    padding: 30px 0 30px 0;
+    text-align: center;
+}

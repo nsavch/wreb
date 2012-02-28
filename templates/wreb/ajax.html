@@ -1,0 +1,6 @@
+{% load wreb %}
+{% if form.is_valid %}
+{% match_result form.match_result %}
+{% else %}
+{{ form.all_errors }}
+{% endif %}

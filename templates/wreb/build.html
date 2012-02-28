@@ -1,0 +1,92 @@
+{% extends "wreb/base.html" %}
+{% comment %}
+    WREB - Web Regular Expression Builder
+    Copyright (C) 2008-2011  Nickolay Savchenko <nsavch@gmail.com>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% block title %}WREB &mdash; Web Regular Expression Builder{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/wreb.css" />
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-latest.js"></script>
+    <script type="text/javascript">
+      var submit_url = '{% url wreb-ajax %}';
+    </script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/wreb.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h1>Python Regular Expression Debugger</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          {% load wreb %}
+	  <div id="result">
+            {% if form.is_valid %}
+	    {% match_result form.match_result %}
+            {% else %}
+            {{ form.all_errors }}
+            {% endif %}
+	  </div>
+        </div>
+      </div>
+      <div class="row">
+	<form action="." method="post" accept-charset="utf-8">
+          {% csrf_token %}
+          <div class="span6">
+            {% for field in form.charfields %}
+            {{ field.label_tag }}
+            {% if field.errors %}<ul class="errorlist">{{ field.errors }}</ul>{% endif %}
+            {{ field }}<br />
+            {% endfor %}
+            <button class="btn btn-primary" name="submit" id="submit">Submit</button>
+            (or press Ctrl-Enter)
+          </div>
+          <div class="span2">
+            {% for field in form.flagfields %}
+            <div class="control-group">
+              {% if field.errors %}<ul class="errorlist">{{ field.errors }}</ul>{% endif %}
+              <div class="controls">
+                <label class="checkbox">
+                  {{ field }}
+                  {{ field.label }}
+                </label>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+	</form>
+        <div class="span4">
+          <div class="well">
+            <h4>About</h4>
+            <p>This is simple regex build/debug tool. It is written in
+            Python, so it uses Python syntax of regular expressions described
+              <a href="http://docs.python.org/library/re.html">here</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="span12">
+        <footer class="footer">
+          &copy; 2012 <a href="mailto:nsavch@gmail.com">Nick Savchenko</a>
+        </footer>
+      </div>
+    </div>
+{% endblock %}
