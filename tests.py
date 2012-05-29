@@ -100,6 +100,11 @@ class RegexFormTest(TestCase):
             num += 1
         self.assertEquals(num, 3)
 
+    def test_empty_group(self):
+        f = forms.RegexForm({'regex': 'foo(.*)bar', 'text': 'foobar'})
+        self.assertTrue(f.is_valid())
+        self.assertEquals(f.match_result()[0].groups(), ('', ))
+
     def test_text_cleaning(self):
         f = forms.RegexForm({'text' :\
                                  'Aef\r\nteohu\nu\\noaeuht\\naoeu\\toeu\r\n'})

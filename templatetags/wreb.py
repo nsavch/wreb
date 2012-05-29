@@ -49,7 +49,7 @@ def show_groups_helper(matches):
             unmatched_left, s, unmatched_right = s.partition(match.group(0))
         answ += [span(unmatched_left, 'unmatched')]
         for group in match.groups():
-            if group is not None:
+            if group not in (None, ''):
                 left, sep, right = s.partition(group)
                 answ.append(span(left, 'match'))
                 answ.append(span(sep, 'groupmatch'))
